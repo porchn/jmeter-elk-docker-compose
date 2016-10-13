@@ -9,11 +9,13 @@ services:
       - data:/data/
     tty: true
     stdin_open: true
+    restart: always
 
   elasticsearch:
     image: elasticsearch:latest
     ports: 
       - "9200:9200"
+    restart: always
 
   logstash:
     image: logstash:latest
@@ -25,6 +27,7 @@ services:
       - data:/data/
     ports:
       - "5000:5000"
+    restart: always
     command: logstash -f /config-dir/logstash.conf
 
   kibana:
@@ -33,6 +36,7 @@ services:
       - "5601:5601"
     links: 
       - elasticsearch
+    restart: always
 
 volumes:
   data: {}
