@@ -2,11 +2,13 @@ version: '2'
 
 services:
   jmeter:
-    image: porchn/jmeter-3.0-master:latest
+    image: porchn/jmeter-3.0-master
     ports:
       - "60000:60000"
     volumes:
       - data:/data/
+    tty: true
+    stdin_open: true
 
   elasticsearch:
     image: elasticsearch:latest
