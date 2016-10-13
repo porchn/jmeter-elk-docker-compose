@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  jmeter:
+    image: porchn/jmeter-3.0-master:latest
+    ports:
+      - "60000:60000"
+    volumes:
+      - data:/data/
+
+  elasticsearch:
+    image: elasticsearch:latest
+    ports: 
+      - "9200:9200"
+
+  logstash:
+    image: logstash:latest
+    links: 
+      - elasticsearch
+      - jmeter
+    volumes:
+      - ./logstash:/config-dir/
+      - data:/data/
+    ports:
+      - "5000:5000"
+    command: logstash -f /config-dir/logstash.conf
+
+  kibana:
+    image: kibana:latest
+    ports:
+      - "5601:5601"
+    links: 
+      - elasticsearch
+
+volumes:
+  data: {}
