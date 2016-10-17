@@ -9,9 +9,12 @@ services:
       - data:/data/
       - ./jmeter/userconfig:/jmeter/userconfig/
       - ./jmeter/testfile:/jmeter/jmxfile/
+      - ./jmeter/mapping:/jmeter/mapping/
     tty: true
     stdin_open: true
     restart: always
+    links: 
+      - elasticsearch
 
   elasticsearch:
     image: elasticsearch:latest
