@@ -7,6 +7,8 @@ services:
       - "60000:60000"
     volumes:
       - data:/data/
+      - jmeter/userconfig:/jmeter/userconfig
+      - jmeter/testfile:/jmeter/jmxfile
     tty: true
     stdin_open: true
     restart: always
